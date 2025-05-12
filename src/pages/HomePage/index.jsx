@@ -17,10 +17,16 @@ export const HomePage = () => {
     [],
   );
 
-  const handleVote = (candidate) => {
-    console.log(`uživatel vybral ${candidate}`);
-    setPresident(candidate);
+  const handleVote = (name) => {
+    if (window.confirm(`opravdu chces vybrat ${name}?`)) {
+      setPresident(name);
+    }
+    /*
+    alert(`Vybral jsi ${name}`); //kdyz chci ukazat okno s vysledkem
+    setPresident(name); //kdyz chci ulozit vysledek
+    */
   };
+  //da se to pouzit i bez teto funkce, ale pak si s tim nemuzu delat co chci, ulozit apod, poslat na server - fetch
 
   return (
     <div className="container">
@@ -42,7 +48,11 @@ export const HomePage = () => {
             name={c.name}
             avatar={c.avatar}
             onSelect={handleVote}
+            // tady by mohlo byt rovnou setPresident ale pak si tu hodnotu neuložim a nemuzu s tim dal pracovat
+            //onSelect={setPresident}
           />
+
+          //na stránce se zobrazí 4 instance te stejné komponenty
         ))}
       </div>
     </div>
